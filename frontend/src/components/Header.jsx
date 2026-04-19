@@ -6,6 +6,7 @@ export default function Header() {
             <h2>My Bookshop</h2>
             <nav>
                 <Link to="/" style={{ marginRight: "10px"} }>Home</Link>
+                <Link to="/login" style={{ marginRight: "10px" }}>Login</Link>
                 <Link to="/cart" style={{ marginRight: "10px" }}>Cart</Link>
                 <Link to="/orders">Orders</Link>
             </nav>

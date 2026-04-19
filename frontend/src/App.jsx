@@ -4,6 +4,7 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
+import Login from './pages/Login'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
 
@@ -19,6 +20,7 @@ function App() {
         <main style={{ padding: "20px", minHeight: "60vh" }}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
           </Routes>

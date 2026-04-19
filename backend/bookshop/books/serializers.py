@@ -9,10 +9,12 @@ class BookSerializer(serializers.ModelSerializer):
     def validate_stock(self, value):
         if value < 0:
             raise serializers.ValidationError("Stock cannot be negative")
+        return value
         
     def validate_price(self, value):
         if value < 0:
             raise serializers.ValidationError("Price cannot be negative")
+        return value
 
 class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
