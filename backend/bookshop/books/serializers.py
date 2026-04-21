@@ -17,14 +17,26 @@ class BookSerializer(serializers.ModelSerializer):
         return value
 
 class CartItemSerializer(serializers.ModelSerializer):
+    book = BookSerializer(read_only=True)
+
+    book_id = serializers.PrimaryKeyRelatedField(
+        queryset = Book.objects.all(),
+        source = "book",
+        write_only=True
+    )
+
+    total_price = serializers.SerializerMethodField()
     class Meta:
         model = CartItem
-        fields = ['id', 'book', 'quantity']
+        fields = ['id', 'book', 'book_id', 'quantity', 'total_price']
 
     def validate_quantity(self, value):
         if value <= 0:
             raise serializers.ValidationError("Quantity must be greater than 0.")
         return value
+    
+    def get_total_price(self, obj):
+        return obj.book.price * obj.quantity
 
 
 class CartSerializer(serializers.ModelSerializer):

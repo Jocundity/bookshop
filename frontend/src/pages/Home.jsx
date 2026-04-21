@@ -6,6 +6,7 @@ export default function Home() {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
 
+    // Fetch books
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/books/")
         .then(response => response.json())
@@ -29,7 +30,7 @@ export default function Home() {
                 "Authorization": `Token ${token}`,
             },
             body: JSON.stringify({
-                book: bookId,
+                book_id: bookId,
                 quantity: 1,
             })
         })
