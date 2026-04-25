@@ -50,7 +50,7 @@ export default function Home() {
                         <p>Price: £{book.price}</p>
                         <p>Stock: {book.stock}</p>
 
-                        <button onClick={() => addToCart(book.id)}>Add to Cart</button>
+                        <button onClick={() => addToCart(book.id)} disabled={book.stock <= 0}>Add to Cart</button>
                     </div>
                 ))}
             </div>

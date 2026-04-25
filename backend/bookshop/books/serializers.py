@@ -30,10 +30,16 @@ class CartItemSerializer(serializers.ModelSerializer):
         model = CartItem
         fields = ['id', 'book', 'book_id', 'quantity', 'total_price']
 
-    def validate_quantity(self, value):
-        if value <= 0:
+    def validate(self, data):
+        quantity = data.get("quantity")
+        book = data.get("book") or getattr(self.instance, "book", None)
+
+        if quantity <= 0:
             raise serializers.ValidationError("Quantity must be greater than 0.")
-        return value
+        if quantity > book.stock:
+            raise serializers.ValidationError("Quantity cannot exceed stock.")
+
+        return data
     
     def get_total_price(self, obj):
         return obj.book.price * obj.quantity
@@ -46,19 +52,24 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['id', 'items']
 
 class OrderItemSerializer(serializers.ModelSerializer):
+    book = BookSerializer(read_only=True)
+    total_price = serializers.SerializerMethodField()
     class Meta:
         model = OrderItem
-        fields = ['id', 'book', 'quantity']
+        fields = ['id', 'book', 'quantity', 'total_price']
 
     def validate_quantity(self, value):
         if value <= 0:
             raise serializers.ValidationError("Quantity must be greater than 0.")
         return value
     
+    def get_total_price(self, obj):
+        return obj.book.price * obj.quantity
+    
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(source="orderitem_set", many=True, read_only=True)
     class Meta:
         model = Order
-        fields = ['id', 'placed', 'items']
+        fields = ['id', 'placed', 'items', 'total_price']
 
 
