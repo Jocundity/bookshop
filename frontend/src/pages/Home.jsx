@@ -34,9 +34,14 @@ export default function Home() {
                 quantity: 1,
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.okay) {
+                throw new Error("Error adding item to cart")
+            }
+            return response.json()
+        })
         .then(data => console.log("Added to cart:", data))
-        .catch(error => console.error("Error adding to cart:", error))
+        .catch(error => alert(error.message));
     }
 
     return (

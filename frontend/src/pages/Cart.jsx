@@ -83,7 +83,7 @@ export default function Cart() {
             // Clear cart on page
             setCartItems([]);
         })
-        .catch(error => console.error("Checkout error:", error))
+        .catch(error => alert(error.message));
 
     }
 

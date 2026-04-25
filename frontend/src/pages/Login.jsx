@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -54,8 +54,9 @@ export default function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}></input>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit">Log In</button>
                 </form>
+                <p>Not registered with us yet? Click <Link to="/signup">here</Link> to sign up.</p>
             </div>
         </>
     );
