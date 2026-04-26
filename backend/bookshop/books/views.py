@@ -15,7 +15,7 @@ from rest_framework.exceptions import ValidationError
 
 # Create your views here.
 class RegisterView(generics.CreateAPIView):
-    query_set = User.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class BookViewSet(ModelViewSet):
@@ -50,17 +50,7 @@ class CartItemViewSet(ModelViewSet):
         return CartItem.objects.filter(cart__user = self.request.user)
     
     def perform_create(self, serializer):
-        cart, created = Cart.objects.get_or_create(user=self.request.user)
-        book = serializer.validated_data["book"]
-        quantity = serializer.validated_data.get("quantity", 1)
-
-        # Check if cart item already exists
-        cart_item = CartItem.objects.filter(cart=cart, book=book).first()
-        if cart_item:
-            cart_item.quantity += quantity
-            cart_item.save()
-        else:
-            serializer.save(cart=cart)
+       serializer.save()
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
@@ -68,7 +58,7 @@ class OrderViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        return Order.objects.filter(user=self.request.user).order_by("-placed")
     
     @action(detail=False, methods=["post"])
     def checkout(self, request):

@@ -23,10 +23,10 @@ export default function Orders() {
             <div>
                 {orders.length === 0 ? <p>You haven't placed any orders yet</p> : (
                     orders.map((order) => (
-                        <div key={order.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
+                        <div key={order.id} className="card">
                             <p>Order Placed: {new Date(order.placed).toLocaleString("en-GB")}</p>
                             <p>Order Total: £{Number(order.total_price).toFixed(2)}</p>
-                            <h4>Items:</h4>
+                            <h4 className="items-heading">Items:</h4>
                             {order.items.map((item) => (
                                 <div key={item.id} style={{marginBottom: "10px"}}>
                                     <p>Title: {item.book.title}</p>

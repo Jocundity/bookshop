@@ -35,21 +35,28 @@ export default function Home() {
             })
         })
         .then(response => {
-            if (!response.okay) {
-                throw new Error("Error adding item to cart")
+            if (!response.ok) {
+                throw new Error("Error adding item to cart");
+            } else {
+                alert("Added to cart");
             }
+
             return response.json()
         })
-        .then(data => console.log("Added to cart:", data))
         .catch(error => alert(error.message));
     }
 
     return (
         <>
+            <div className="hero">
+                <h2>Welcome to our shop!</h2>
+                <p>Whether you're searching for an elusive first edition or just hoping to stumble upon a forgotten gem,
+                     our rare and antique books are sure to tickle your fancy. Let us help you discover your next treasure.</p>
+            </div>
             <h1>Books</h1>
-            <div>
+            <div className="books">
                 {books.map((book) => (
-                    <div key={book.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
+                    <div key={book.id} className="card">
                         <h3>{book.title}</h3>
                         <h4>{book.author}</h4>
                         <p>Price: £{book.price}</p>

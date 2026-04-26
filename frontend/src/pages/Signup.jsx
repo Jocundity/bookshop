@@ -54,36 +54,38 @@ export default function Signup() {
 
     return (
         <>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username: </label>
-                    <input 
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    ></input>
-                    {errors.username && <p style={{ color: "red" }}>{errors.username[0]}</p>}
-                </div>
-                <div>
-                    <label>Password: </label>
-                    <input 
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    ></input>
-                    {errors.password && <p style={{ color: "red" }}>{errors.password[0]}</p>}
-                </div>
-                <div>
-                    <label>Confirm Password: </label>
-                    <input 
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}></input>
-                    {!passwordMatch && <p style={{ color: "red" }}>Passwords do not match</p>}
-                </div>
-                <button type="submit" disabled={!passwordMatch}>Sign Up</button>
-            </form>
+            <div className="card">
+                <h1>Sign Up</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-row">
+                        <label>Username: </label>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        ></input>
+                    </div>
+                    {errors.username && <p className="form-error" style={{ color: "red" }}>{errors.username[0]}</p>}
+                    <div className="form-row">
+                        <label>Password: </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        ></input>
+                    </div>
+                    {errors.password && <p className="form-error" style={{ color: "red" }}>{errors.password[0]}</p>}
+                    <div className="form-row">
+                        <label>Confirm Password: </label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                    </div>
+                    {!passwordMatch && <p className="form-error" style={{ color: "red" }}>Passwords do not match</p>}
+                    <button type="submit" disabled={!passwordMatch}>Sign Up</button>
+                </form>
+            </div>
         </>
     )
 }

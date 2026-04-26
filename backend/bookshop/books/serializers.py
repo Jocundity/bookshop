@@ -57,12 +57,35 @@ class CartItemSerializer(serializers.ModelSerializer):
         quantity = data.get("quantity")
         book = data.get("book") or getattr(self.instance, "book", None)
 
-        if quantity <= 0:
-            raise serializers.ValidationError("Quantity must be greater than 0.")
+        if quantity is None or quantity <= 0:
+            raise serializers.ValidationError({"quantity": "Quantity must be greater than 0."})
         if quantity > book.stock:
-            raise serializers.ValidationError("Quantity cannot exceed stock.")
+            raise serializers.ValidationError({"quantity": "Quantity cannot exceed stock."})
 
         return data
+    
+    # Add to cart
+    def create(self, validated_data):
+        request = self.context["request"]
+        user = request.user
+
+        cart, created = Cart.objects.get_or_create(user=user)
+
+        book = validated_data["book"]
+        quantity = validated_data["quantity"]
+
+        item, created = CartItem.objects.get_or_create(
+            cart=cart,
+            book=book,
+            defaults={"quantity": quantity}
+        )
+
+        # If item already exists, increment quantity
+        if not created:
+            item.quantity += quantity
+            item.save()
+
+        return item
     
     def get_total_price(self, obj):
         return obj.book.price * obj.quantity

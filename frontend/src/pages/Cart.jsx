@@ -90,18 +90,20 @@ export default function Cart() {
     return (
         <>
             <h1>My Cart</h1>
-            {cartItems.length === 0 ? <p>Your cart is empty</p> : (
-                cartItems.map((item) => (
-                    <div key={item.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-                        <p>Book: {item.book.title}</p>
-                        <p>Total: £{item.total_price.toFixed(2)}</p>
-                        <p>Quantity: <button onClick={() => updateQuantity(item, -1)} disabled={item.quantity <= 1} style={{ marginRight: "10px" }}>-</button>{item.quantity}<button onClick={() => updateQuantity(item, 1)} disabled={item.quantity >= item.book.stock} style={{ marginLeft: "10px" }}>+</button></p>
-                        <button onClick={() => removeItem(item)}>Remove</button>
-                    </div>
-                ))
-            )}
-            <h2>Total: £{cartTotal.toFixed(2)}</h2>
-            <button onClick={handleCheckout}>Checkout</button>
+            <div className="card">
+                {cartItems.length === 0 ? <p>Your cart is empty</p> : (
+                    cartItems.map((item) => (
+                        <div key={item.id}>
+                            <p>Book: {item.book.title}</p>
+                            <p>Total: £{item.total_price.toFixed(2)}</p>
+                            <p>Quantity: <button onClick={() => updateQuantity(item, -1)} disabled={item.quantity <= 1} style={{ marginRight: "10px" }}>-</button>{item.quantity}<button onClick={() => updateQuantity(item, 1)} disabled={item.quantity >= item.book.stock} style={{ marginLeft: "10px" }}>+</button></p>
+                            <button onClick={() => removeItem(item)}>Remove</button>
+                        </div>
+                    ))
+                )}
+                <h2>Total: £{cartTotal.toFixed(2)}</h2>
+                <button onClick={handleCheckout}>Checkout</button>
+            </div>
             
         </>
     );

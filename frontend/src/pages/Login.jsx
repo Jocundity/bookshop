@@ -36,10 +36,10 @@ export default function Login() {
 
     return (
         <>
-            <div>
+            <div className="card">
                 <h1>Login</h1>
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div className="form-row">
                         <label>Username: </label>
                         <input 
                             type="text"
@@ -47,7 +47,7 @@ export default function Login() {
                             onChange ={(e) => setUsername(e.target.value)}
                         ></input>
                     </div>
-                    <div>
+                    <div className="form-row">
                         <label>Password: </label>
                         <input 
                             type="password"
