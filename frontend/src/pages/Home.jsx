@@ -5,14 +5,18 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
+    const [search, setSearch] = useState("");
 
     // Fetch books
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/books/")
+        const url = search ? `http://127.0.0.1:8000/api/books/?search=${search}` :
+            "http://127.0.0.1:8000/api/books/"
+
+        fetch(url)
         .then(response => response.json())
         .then(data => setBooks(data.results))
         .catch(error => console.error("Error fetching books:", error));
-    }, []);
+    }, [search]);
 
     const addToCart = (bookId) => {
         const token = localStorage.getItem("token");
@@ -54,6 +58,12 @@ export default function Home() {
                      our rare and antique books are sure to tickle your fancy. Let us help you discover your next treasure.</p>
             </div>
             <h1>Books</h1>
+            <div className="search">
+                <input type="text" 
+                    placeholder="🔎 Seach by author or title"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}></input>
+            </div>
             <div className="books">
                 {books.map((book) => (
                     <div key={book.id} className="card">
