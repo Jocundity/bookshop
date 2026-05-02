@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField(use_url=True) # send full url path to frontend
     class Meta:
         model = Book
         fields = '__all__'

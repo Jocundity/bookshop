@@ -26,6 +26,7 @@ export default function Orders() {
                         <div key={order.id} className="card">
                             <p>Order Placed: {new Date(order.placed).toLocaleString("en-GB")}</p>
                             <p>Order Total: £{Number(order.total_price).toFixed(2)}</p>
+                            <hr></hr>
                             <h4 className="items-heading">Items:</h4>
                             {order.items.map((item) => (
                                 <div key={item.id} style={{marginBottom: "10px"}}>

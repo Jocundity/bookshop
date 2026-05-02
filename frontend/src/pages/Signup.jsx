@@ -65,7 +65,7 @@ export default function Signup() {
                             onChange={(e) => setUsername(e.target.value)}
                         ></input>
                     </div>
-                    {errors.username && <p className="form-error" style={{ color: "red" }}>{errors.username[0]}</p>}
+                    {errors.username && <p className="form-error">{errors.username[0]}</p>}
                     <div className="form-row">
                         <label>Password: </label>
                         <input
@@ -74,7 +74,7 @@ export default function Signup() {
                             onChange={(e) => setPassword(e.target.value)}
                         ></input>
                     </div>
-                    {errors.password && <p className="form-error" style={{ color: "red" }}>{errors.password[0]}</p>}
+                    {errors.password && <p className="form-error">{errors.password[0]}</p>}
                     <div className="form-row">
                         <label>Confirm Password: </label>
                         <input
@@ -82,7 +82,7 @@ export default function Signup() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}></input>
                     </div>
-                    {!passwordMatch && <p className="form-error" style={{ color: "red" }}>Passwords do not match</p>}
+                    {!passwordMatch && <p className="form-error">Passwords do not match</p>}
                     <button type="submit" disabled={!passwordMatch}>Sign Up</button>
                 </form>
             </div>

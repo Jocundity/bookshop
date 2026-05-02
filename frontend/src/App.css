@@ -110,7 +110,7 @@ main {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -128,10 +128,16 @@ button {
   font-size: 1rem;
   text-transform: uppercase;
   transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 button:hover {
   background-color: #346c6a;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 
@@ -180,6 +186,10 @@ button:hover {
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
+.books .card {
+  width: 300px;
+}
+
 .search {
   width: 100%;
   margin-bottom: 1rem;
@@ -193,6 +203,19 @@ button:hover {
   padding: 1rem;
 }
 
+.thumbnail {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+hr {
+  border: none;
+  border-top: 6px double #DFB66B;
+  margin: 1rem 0;
+}
+
 .form-row {
   display: flex;
   justify-content: space-between;
@@ -201,7 +224,7 @@ button:hover {
 }
 
 input {
-  background-color: #F2E3CF;;
+  background-color: #F2E3CF;
   width: 50%;
   border: 1px solid #428985;
   border-radius: 1rem;
@@ -215,12 +238,20 @@ input {
 }
 
 .form-error {
+  color: red;
   text-align: right;
   margin-bottom: 1rem;
 }
 
 .form-card button {
   margin-bottom: 1rem;
+}
+
+.cart-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
 }
 
 .items-heading {

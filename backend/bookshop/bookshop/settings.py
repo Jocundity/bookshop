@@ -127,6 +127,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Media files (for uploaded images)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Django Rest Framework settings (number of results, filtering, user authentication)
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
