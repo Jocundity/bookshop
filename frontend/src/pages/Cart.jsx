@@ -106,7 +106,7 @@ export default function Cart() {
                         {cartItems.map((item) => (
                         <div key={item.id}>
                             <div className="cart-row">
-                                <img className="thumbnail" src={item.book.thumbnail} />
+                                <img className="thumbnail" src={item.book.thumbnail} alt={item.book.title} />
                                 <div>
                                     <p>Book: {item.book.title}</p>
                                     <p>Total: £{item.total_price.toFixed(2)}</p>
