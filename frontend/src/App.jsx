@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
+import Dashboard from './pages/Dashboard'
 
 
 
@@ -32,6 +33,9 @@ function App() {
             <ProtectedRoute>
               <Orders />
             </ProtectedRoute>
+          } />
+          <Route path="/dashboard" element={
+            <Dashboard />
           } />
         </Routes>
       </main>

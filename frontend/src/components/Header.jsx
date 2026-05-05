@@ -5,9 +5,11 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setMenuOpen(false);
         navigate("/");
     }
@@ -26,6 +28,7 @@ export default function Header() {
                 <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
                 <Link to="/cart" onClick={() => setMenuOpen(false)}>Cart</Link>
                 <Link to="/orders" onClick={() => setMenuOpen(false)}>Orders</Link>
+                {user?.is_staff && <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>}
                 {token ? <button onClick={handleLogout} className="logout-button">Logout</button> : <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>}
             </nav>
         </header>

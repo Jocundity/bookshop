@@ -23,7 +23,19 @@ export default function Login() {
         .then((data) => {
             if(data.token) {
                 localStorage.setItem("token", data.token);
-                navigate("/");
+
+                // Get user info (username, and is_staff)
+                fetch("http://127.0.0.1:8000/api/me/", {
+                    headers: {
+                        "Authorization": `Token ${data.token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(user => {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    navigate("/");
+                });
+                
             } else {
                 alert("Invalid credentials")
                 setUsername("");

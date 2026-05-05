@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User
 from .models import Book, Cart, CartItem, Order, OrderItem
 
@@ -25,6 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    parser_classes = [MultiPartParser, FormParser]
+
     thumbnail = serializers.ImageField(use_url=True) # send full url path to frontend
     class Meta:
         model = Book

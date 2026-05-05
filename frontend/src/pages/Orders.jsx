@@ -21,7 +21,7 @@ export default function Orders() {
         <>
             <h1>My Orders</h1>
             <div>
-                {orders.length === 0 ? <p>You haven't placed any orders yet</p> : (
+                {orders.length === 0 ? <div className="card"><p>You haven't placed any orders yet</p></div> : (
                     orders.map((order) => (
                         <div key={order.id} className="card">
                             <p>Order Placed: {new Date(order.placed).toLocaleString("en-GB")}</p>

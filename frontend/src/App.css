@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Cinzel, serif;
 }
 
-button {
+button, input::file-selector-button {
   background-color: #428985;
   color: #DFB66B;
   padding: 1rem;
@@ -131,7 +131,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover, input::file-selector-button:hover {
   background-color: #346c6a;
 }
 
@@ -177,7 +177,7 @@ button:disabled {
 }
 
 .card {
-  background: white;
+  background-color: white;
   padding: 1rem;
   margin: 1rem;
   border-radius: 1rem;
@@ -197,7 +197,7 @@ button:disabled {
 }
 
 .search input {
-  background: white;
+  background-color: white;
   border-radius: 2rem;
   width: 100%;
   padding: 1rem;
@@ -233,6 +233,13 @@ input {
   font-size: 1rem;
 }
 
+input[type="file"] {
+  font-size: 1px;
+  color: transparent;
+  background: none;
+  border: none;
+}
+
 .login-button {
   margin-bottom: 1rem;
 }
@@ -258,6 +265,50 @@ input {
   color: #428985;
   margin-top: 1rem;
 }
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  -webkit-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-header button, .delete-button {
+  background-color: #802A2A;
+}
+
+.modal-header button:hover, .delete-button:hover {
+  background-color: #732626;
+}
+
 
 /* Mobile Styles */
 @media (max-width: 768px) {

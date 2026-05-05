@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from .models import Book, Cart, CartItem, Order, OrderItem
 from .serializers import UserSerializer, BookSerializer, CartSerializer, CartItemSerializer, OrderSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -18,8 +19,17 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class MeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            "username": request.user.username,
+            "is_staff": request.user.is_staff
+        })
+
 class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
+    queryset = Book.objects.all().order_by("title")
     serializer_class = BookSerializer
     filter_backends = [
         DjangoFilterBackend,
@@ -29,6 +39,15 @@ class BookViewSet(ModelViewSet):
     filterset_fields = ['title', 'author']
     search_fields = ['title', 'author']
     ordering_fields = ['price', 'title']
+
+    def get_permissions(self):
+        # Allow anyone to view books
+        if self.action in ["list", "retrieve"]:
+            return [AllowAny()]
+        
+        # Only staff can create, update, or delete books
+        return [IsAdminUser()]
+        
 
 class CartViewSet(ModelViewSet):
     queryset = Cart.objects.all()
