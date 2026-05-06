@@ -16,7 +16,7 @@ export default function Header() {
 
     return (
         <header>
-            <Link to="/" className="site-title">A.Z. Fell & Co.</Link>
+            {!user?.is_staff ? <Link to="/" className="site-title">A.Z. Fell & Co.</Link> : <Link to="/dashboard" className="site-title">A.Z. Fell & Co.</Link>}
             <div className="header-right">
                 <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
                     <span></span>
@@ -25,9 +25,9 @@ export default function Header() {
                 </button>
             </div>
             <nav className={menuOpen ? "open": ""}>
-                <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-                <Link to="/cart" onClick={() => setMenuOpen(false)}>Cart</Link>
-                <Link to="/orders" onClick={() => setMenuOpen(false)}>Orders</Link>
+                {!user?.is_staff && <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>}
+                {!user?.is_staff && <Link to="/cart" onClick={() => setMenuOpen(false)}>Cart</Link>}
+                {!user?.is_staff && <Link to="/orders" onClick={() => setMenuOpen(false)}>Orders</Link>}
                 {user?.is_staff && <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>}
                 {token ? <button onClick={handleLogout} className="logout-button">Logout</button> : <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>}
             </nav>
