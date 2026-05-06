@@ -1,6 +1,10 @@
 # Bookshop Web App
 This project is an e-commerce web application for an antique bookshop, built using React JS and Django REST API. It features user authentication and an inventory, cart, and order management system supported by a SQL database.  
 
+It has two intended users:
+1. Customers - who can sign up and place orders
+2. Staff - who can log in and manage inventory
+
 ## Project Demo
 [![Project Demo](https://img.youtube.com/vi/pq5MqdB5vws/maxresdefault.jpg)](https://youtu.be/pq5MqdB5vws)
 
