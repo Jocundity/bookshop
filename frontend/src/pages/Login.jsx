@@ -33,7 +33,12 @@ export default function Login() {
                 .then(response => response.json())
                 .then(user => {
                     localStorage.setItem("user", JSON.stringify(user));
-                    navigate("/");
+
+                    if (user.is_staff) {
+                        navigate("/dashboard");
+                    } else {
+                        navigate("/");
+                    }
                 });
                 
             } else {
