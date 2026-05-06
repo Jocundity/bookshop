@@ -14,7 +14,8 @@ import Dashboard from './pages/Dashboard'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <>
@@ -35,7 +36,9 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/dashboard" element={
-            <Dashboard />
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           } />
         </Routes>
       </main>
